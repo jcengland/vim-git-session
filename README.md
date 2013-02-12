@@ -8,6 +8,6 @@ For instance: "master-rnaveiras-vim-git-session-session.vim"
 
 This sessions are saved at ~/.vim/sessions
 
-The plugin map <leader>s to save the session or you can call the function "SaveCurrentSession()"
+The plugin map `<leader>s` to save the session or you can call the function "SaveCurrentSession()"
 
 For open a session just run `vim -S session-name.vim`
