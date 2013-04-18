@@ -17,13 +17,14 @@ function! s:GitRepoName()
   " git remote -v |awk -F. '/push/ {c=$2; gsub(/com:/,"",c); gsub(/\//,"-", c); print c}'
  let s:repo_name = system(s:git_executable . " remote -v |awk -F. '/push/ {print $2}'")
  let s:repo_name = substitute(s:repo_name, 'com:', '', '')
- let s:repo_name = substitute(s:repo_name, '/', '-', '')
+ let s:repo_name = substitute(s:repo_name, '/', '-', 'g')
  let s:repo_name = substitute(s:repo_name, '\n$', '', '')
  return s:repo_name
 endfunction
 
 function! s:GitBranch()
   let s:branch = system(s:git_executable . " branch 2>/dev/null | grep '*' | sed 's/\* //'")
+  let s:branch = substitute(s:branch, '/', '-', 'g')
   let s:branch = substitute(s:branch, '\n$', '-', '')
   return s:branch
 endfunction
