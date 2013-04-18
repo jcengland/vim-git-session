@@ -37,8 +37,22 @@ function! s:PrepareSessionsPath()
 endfunction
 
 function! SaveCurrentSession()
-  silent! execute s:PrepareSessionsPath()
-  execute "mksession! " . s:sessionspath . s:GitBranch() . s:GitRepoName() . "-session.vim"
+  if !exists('s:session_loading')
+    silent! execute s:PrepareSessionsPath()
+    execute "mksession! " . s:sessionspath . s:GitBranch() . s:GitRepoName() . "-session.vim"
+  endif
 endfunction
 
+function! OpenCurrentSession()
+  silent! execute s:PrepareSessionsPath()
+  let s:session_loading = 'yes'
+  execute "source " . s:sessionspath . s:GitBranch() . s:GitRepoName() . "-session.vim"
+  unlet s:session_loading
+endfunction
+
+if exists('g:session_autosave') && g:session_autosave == 'yes'
+  au BufLeave * call SaveCurrentSession()
+endif
+
 nmap <silent> <leader>s :call SaveCurrentSession()<CR>
+nmap <silent> <leader>o :call OpenCurrentSession()<CR>
