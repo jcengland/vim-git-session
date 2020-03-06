@@ -54,5 +54,5 @@ if exists('g:session_autosave') && g:session_autosave == 'yes'
   au BufLeave * call SaveCurrentSession()
 endif
 
-nmap <silent> <leader>s :call SaveCurrentSession()<CR>
-nmap <silent> <leader>o :call OpenCurrentSession()<CR>
+nmap <silent> <leader>S :call SaveCurrentSession()<CR>
+nmap <silent> <leader>O :call OpenCurrentSession()<CR>
